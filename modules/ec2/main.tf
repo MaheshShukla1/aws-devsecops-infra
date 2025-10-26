@@ -9,12 +9,13 @@ resource "aws_instance" "app_server" {
 
   user_data = <<-EOF
               #!/bin/bash
-              yum update -y
-              yum install -y httpd
-              systemctl start httpd
-              systemctl enable httpd
-              echo "Hello from DevSecOps EC2" > /var/www/html/index.html
+              apt update -y
+              apt install -y apache2
+              systemctl start apache2
+              systemctl enable apache2
+              echo "Hello from DevSecOps EC2 - Ubuntu" > /var/www/html/index.html
               EOF
+
 
   tags = {
     Name = "DevSecOps-AppServer"
