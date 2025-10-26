@@ -1,0 +1,14 @@
+resource "aws_cloudwatch_metric_alarm" "cpu_high" {
+  alarm_name          = "EC2CPUHigh"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 70
+  alarm_description   = "This metric monitors EC2 CPU usage"
+  dimensions = {
+    InstanceId = aws_instance.app_server.id
+  }
+}

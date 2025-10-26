@@ -5,6 +5,7 @@ resource "aws_instance" "app_server" {
   vpc_security_group_ids      = [var.security_group_id]
   key_name                    = var.key_name
   associate_public_ip_address = true
+  iam_instance_profile        = aws_iam_instance_profile.ec2_profile.name
 
   user_data = <<-EOF
               #!/bin/bash
@@ -15,5 +16,7 @@ resource "aws_instance" "app_server" {
               echo "Hello from DevSecOps EC2" > /var/www/html/index.html
               EOF
 
-  tags = { Name = "DevSecOps-AppServer" }
+  tags = {
+    Name = "DevSecOps-AppServer"
+  }
 }

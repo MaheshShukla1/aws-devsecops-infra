@@ -1,14 +1,22 @@
-# AWS DevSecOps Infra Automation
+# AWS DevSecOps Infrastructure Automation
 
-## Description
-This project demonstrates a hands-on AWS DevSecOps project using Terraform. It includes:
-- Custom VPC with public subnet
-- EC2 instance running Apache/Nginx
-- IAM Role attached to EC2 for S3 read-only access
-- S3 bucket for storage
-- CloudWatch monitoring setup
+## Overview
+This project demonstrates a hands-on **AWS DevSecOps infrastructure** setup using Terraform. It highlights modern AWS best practices with modular, reusable code.
+
+**Key Features:**
+- Custom **VPC** with public and optional private subnets
+- **EC2** instance running Apache/Nginx with automated User Data script
+- **IAM Role** attached to EC2 for S3 read-only access
+- **S3 bucket** with ownership controls (`BucketOwnerPreferred`)
+- **CloudWatch** monitoring setup for EC2 metrics
+- Modular Terraform code structure for reusability
+
+---
 
 ## Architecture
+
+Visual overview of the infrastructure:
+
 ![Architecture Diagram](architecture.png)
 
 ```mermaid
@@ -29,20 +37,9 @@ flowchart TD
     %% S3 Bucket
     S3["S3 Bucket: devsecops-storage-<id> \n Ownership: BucketOwnerPreferred"]
 
-    %% Flow & Connections
+    %% Connections
     pub_subnet --> EC2App
     EC2App -->|Reads/Writes| S3
     SGWeb --> EC2App
-
-    %% Optional Private Subnet Components (Advanced)
     priv_subnet -->|Optional: App/DB| SGApp
 ```
-
-## How to Run
-1. terraform init
-2. terraform plan
-3. terraform apply
-
-## Outputs
-- EC2 Public IP
-- S3 Bucket Name
