@@ -13,5 +13,5 @@ output "public_subnet_id" {
 # Security Group ID
 output "web_sg_id" {
   value       = aws_security_group.web_sg.id
-  description = "ID of the security group allowing SSH + HTTP"
+  description = "ID of the security group allowing SSH + HTTP + HTTPS"
 }

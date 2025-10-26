@@ -20,7 +20,10 @@ resource "aws_iam_policy" "s3_readonly" {
     Statement = [{
       Action   = ["s3:GetObject","s3:ListBucket"]
       Effect   = "Allow"
-      Resource = "*"
+      Resource = [
+        "arn:aws:s3:::${var.s3_bucket_name}",
+        "arn:aws:s3:::${var.s3_bucket_name}/*"
+      ]
     }]
   })
 }

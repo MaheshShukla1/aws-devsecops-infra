@@ -15,23 +15,21 @@ variable "az" {
 }
 
 variable "my_ip" {
-  description = "Your public IP for SSH"
+  description = "Your public IP for SSH (e.g., x.x.x.x/32)"
+  type        = string
 }
 
 variable "vpc_name" {
   default = "devsecops-vpc"
 }
 
-variable "ami" {
-  default = "ami-0c02fb55956c7d316" # Amazon Linux 2
-}
-
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 
 variable "key_name" {
   description = "EC2 Key pair name"
+  type        = string
 }
 
 variable "bucket_name_prefix" {

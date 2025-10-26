@@ -1,15 +1,7 @@
-# AMI for EC2
-variable "ami" {
-  description = "AMI ID for the EC2 instance"
-  type        = string
-  default     = "ami-0dba2cb6798deb6d8" # Ubuntu 22.04 LTS AMI ID for ap-south-1 (Mumbai)
-}
-
 # Instance type
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t3.micro"
 }
 
 # Subnet ID to launch EC2 in
@@ -27,5 +19,11 @@ variable "security_group_id" {
 # EC2 key pair
 variable "key_name" {
   description = "Key pair name for SSH access"
+  type        = string
+}
+
+# S3 bucket name for IAM policy scoping
+variable "s3_bucket_name" {
+  description = "Name of the S3 bucket for read access"
   type        = string
 }
