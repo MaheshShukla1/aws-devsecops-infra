@@ -1,8 +1,23 @@
 # AWS DevSecOps Infrastructure Automation with Terraform
 
+**A production-ready, secure, and scalable AWS infrastructure automated with Terraform, showcasing DevSecOps best practices for cloud automation, security, and monitoring.**
+
+## 📑 Table of Contents
+- [Project Overview](#-project-overview)
+- [Tools & Prerequisites](#-tools--prerequisites)
+- [Architecture Diagram](#-architecture-diagram)
+- [Deployment Steps](#-deployment-steps)
+- [Terraform Outputs](#-terraform-outputs)
+- [Screenshots](#-screenshots)
+- [Security Features](#-security-features)
+- [Challenges & Solutions](#-challenges--solutions)
+- [Key Learnings](#-key-learnings)
+- [Future Enhancements](#-future-enhancements)
+- [References](#-references)
+
 ## 🧠 Project Overview
 
-This project demonstrates a **secure, scalable, and automated 3-tier AWS infrastructure** using **Terraform** for Infrastructure as Code (IaC). It provisions a VPC, EC2 instance, S3 bucket, IAM roles, CloudWatch monitoring, and SNS notifications, following **DevSecOps best practices**. The setup is modular, reusable, and deployable across AWS regions, showcasing skills in cloud automation, security, and monitoring.
+This project automates a **secure, scalable 3-tier AWS infrastructure** using **Terraform** for Infrastructure as Code (IaC). It provisions a VPC, EC2 instance, S3 bucket, IAM roles, CloudWatch monitoring, and SNS notifications, adhering to **DevSecOps best practices**. The setup is modular, reusable, and deployable across AWS regions, demonstrating expertise in cloud automation, security, and monitoring.
 
 ### 🎯 Key Features
 - **Custom VPC**: Configured with public subnet, Internet Gateway, and route table for internet access.
@@ -120,8 +135,11 @@ terraform apply -var="my_ip=202.179.94.20/32" -var="key_name=devsecops-key" -aut
 
 ### 5. Verify Resources
 
+
 - **EC2**: Check instance (DevSecOps-AppServer) in AWS Console with public IP.
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/ec2_instance.png" alt="EC2 Instance">
 - **Web Page**: Open http://<ec2-public-ip> in browser (shows "Hello from DevSecOps EC2 - Ubuntu").
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/web_server.png" alt="Web Server">
 
 - **SSH Access**:
 
@@ -131,10 +149,39 @@ ssh -i ~/.ssh/devsecops-key.pem ubuntu@<ec2-public-ip>
 cat /var/www/html/index.html
 ```
 
+![SSH Session](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/ssh.png)
+
+---
+
+# Project Verification Screenshots
+
 - **S3**: Verify bucket (devsecops-storage-<random_id>) with versioning, encryption, and public access blocked.
+  
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/s3_bucket.png" alt="S3 Bucket">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/s3_encryption.png" alt="S3 Encryption">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/s3_block_public_access.png" alt="S3 Public Access Block">
 - **CloudWatch**: Confirm EC2CPUHigh alarm for CPU > 70%.
+  
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/cloudwatch_EC2CPUHigh.png" alt="CloudWatch Alarm">
 - **SNS**: Check ec2-cpu-high-topic for notifications.
+  
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/sns_topic.png" alt="SNS Topic">
 - **VPC**: Validate devsecops-vpc, subnet, IGW, route table, and security group.
+  
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops_vpc.png" alt="VPC">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-public-subnet.png" alt="Public Subnet">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-igw.png" alt="Internet Gateway">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-public-rt.png" alt="Route Table">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-sg.png" alt="Security Group">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/security_group.png" alt="Security Group Rules">
+- **IAM**: Verify ec2-s3-readonly-role and S3ReadOnlyPolicy.
+  
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/iam_role.png" alt="IAM Role">
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/iam_policy.png" alt="IAM Policy">
+- **Tags**: Check resource tags.
+  
+    - <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/tags.png" alt="Tags">
+    
 
 ### 6. Static Code Analysis (Optional)
 
@@ -162,25 +209,25 @@ terraform destroy -var="my_ip=202.179.94.20/32" -var="key_name=devsecops-key" -a
 
 |**Screenshot**|**Description**|
 |---|---|
-|terraform_plan.png|Terraform plan output showing infrastructure changes.|
-|terraform_apply.png|Terraform apply output with successful deployment and outputs.|
-|ec2_instance.png|EC2 instance details (DevSecOps-AppServer, t3.micro, public IP).|
-|web_server.png|Web page served by EC2 (http://<ec2-public-ip>).|
-|ssh.png|SSH session to EC2 instance showing Apache index file.|
-|s3_bucket.png|S3 bucket overview (devsecops-storage-<random_id>).|
-|s3_encryption.png|S3 bucket server-side encryption settings.|
-|s3_block_public_access.png|S3 bucket public access block settings.|
-|devsecops_vpc.png|VPC details (devsecops-vpc, CIDR: 10.0.0.0/16).|
-|devsecops-vpc-public-subnet.png|Public subnet details (10.0.1.0/24).|
-|devsecops-vpc-igw.png|Internet Gateway (devsecops-vpc-igw).|
-|devsecops-vpc-public-rt.png|Route table with route to 0.0.0.0/0.|
-|devsecops-vpc-sg.png|Security group with SSH/HTTP/HTTPS rules.|
-|security_group.png|Detailed security group ingress/egress rules.|
-|cloudwatch_EC2CPUHigh.png|CloudWatch alarm for CPU > 70% linked to SNS.|
-|iam_role.png|IAM role (ec2-s3-readonly-role) for EC2.|
-|iam_policy.png|IAM policy (S3ReadOnlyPolicy) for S3 access.|
-|tags.png|Resource tags (Name, Environment: DevSecOps).|
-|architecture_diagram.png|Full architecture diagram of the infrastructure.|
+|[terraform_plan.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/terraform_plan.png)|Terraform plan output showing infrastructure changes.|
+|[terraform_apply.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/terraform_apply.png)|Terraform apply output with successful deployment and outputs.|
+|[ec2_instance.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/ec2_instance.png)|EC2 instance details (DevSecOps-AppServer, t3.micro, public IP).|
+|[web_server.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/web_server.png)|Web page served by EC2 (http://<ec2-public-ip>).|
+|[ssh.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/ssh.png)|SSH session to EC2 instance showing Apache index file.|
+|[s3_bucket.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/s3_bucket.png)|S3 bucket overview (devsecops-storage-<random_id>).|
+|[s3_encryption.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/s3_encryption.png)|S3 bucket server-side encryption settings.|
+|[s3_block_public_access.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/s3_block_public_access.png)|S3 bucket public access block settings.|
+|[devsecops_vpc.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops_vpc.png)|VPC details (devsecops-vpc, CIDR: 10.0.0.0/16).|
+|[devsecops-vpc-public-subnet.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-public-subnet.png)|Public subnet details (10.0.1.0/24).|
+|[devsecops-vpc-igw.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-igw.png)|Internet Gateway (devsecops-vpc-igw).|
+|[devsecops-vpc-public-rt.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-public-rt.png)|Route table with route to 0.0.0.0/0.|
+|[devsecops-vpc-sg.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/devsecops-vpc-sg.png)|Security group with SSH/HTTP/HTTPS rules.|
+|[security_group.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/security_group.png)|Detailed security group ingress/egress rules.|
+|[cloudwatch_EC2CPUHigh.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/cloudwatch_EC2CPUHigh.png)|CloudWatch alarm for CPU > 70% linked to SNS.|
+|[iam_role.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/iam_role.png)|IAM role (ec2-s3-readonly-role) for EC2.|
+|[iam_policy.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/iam_policy.png)|IAM policy (S3ReadOnlyPolicy) for S3 access.|
+|[tags.png](https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/tags.png)|Resource tags (Name, Environment: DevSecOps).|
+
 
 ---
 
@@ -228,3 +275,5 @@ terraform destroy -var="my_ip=202.179.94.20/32" -var="key_name=devsecops-key" -a
 - [AWS Documentation](https://docs.aws.amazon.com/)
 - [tfsec](https://aquasecurity.github.io/tfsec/) for static code analysis
 - [draw.io](https://app.diagrams.net/) for architecture diagram
+
+_This project showcases my ability to design, deploy, and secure AWS infrastructure using Terraform, adhering to DevSecOps principles. Explore the code and screenshots to see the implementation in action!_
