@@ -54,6 +54,10 @@ This project automates a **secure, scalable 3-tier AWS infrastructure** using **
 
 The architecture is a secure, scalable 3-tier setup with networking, compute, and storage layers, monitored via CloudWatch and SNS.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/MaheshShukla1/aws-devsecops-infra/main/screenshots/aws_devsecops_image.png" alt="AWS DevSecOps Architecture" width="800">
+</p>
+
 ```mermaid
 graph TD
     %% VPC and Networking
